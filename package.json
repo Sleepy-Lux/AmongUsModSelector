@@ -1,0 +1,20 @@
+{
+  "name": "amongusmodselector",
+  "module": "src/index.ts",
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "scripts": {
+    "run": "bun run src/index.ts",
+    "build": "tsc src/index.ts --skipLibCheck --outdir dist && bun run compile && cp icon.ico dist",
+    "compile": "cd dist && node ../compile.js"
+  },
+  "dependencies": {
+    "chalk": "v4.0.0",
+    "nexe": "^4.0.0-rc.6",
+    "rcedit": "1.1.0"
+  }
+}
