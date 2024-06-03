@@ -80,7 +80,6 @@ Make sure the among us exe is named "Among Us.exe"`));
             const files = fs.readdirSync(amongus_path);
             for (const file of files)
                 if (!file.toLowerCase().includes("data") || file.toLowerCase().includes("config")) {
-                    console.log(file);
                     fs.rmSync(path.join(amongus_path, file), { recursive: true, force: true });
                 }
             console.log(chalk.gray("Deleting Old AmongUs Version Files..."));
