@@ -25,7 +25,9 @@ function Recursive_Copy(source: string, dest: string) {
         if (fs.lstatSync(file).isFile())
             fs.copyFileSync(file, path.join(dest, file_name));
         else {
-            fs.mkdirSync(path.join(dest, file_name));
+            try  {
+                fs.mkdirSync(path.join(dest, file_name));
+            } catch {};
             Recursive_Copy(file, path.join(dest, file_name));
         };
     };
@@ -76,8 +78,11 @@ Make sure the among us exe is named "Among Us.exe"`));
             
             const amongus_path = path.join("..", "Among Us");
             const files = fs.readdirSync(amongus_path);
-            fs.rmSync(amongus_path, { recursive: true, force: true });
-            fs.mkdirSync(amongus_path);
+            for (const file of files)
+                if (!file.toLowerCase().includes("data") || file.toLowerCase().includes("config")) {
+                    console.log(file);
+                    fs.rmSync(path.join(amongus_path, file), { recursive: true, force: true });
+                }
             console.log(chalk.gray("Deleting Old AmongUs Version Files..."));
 
             await Recursive_Copy(version, amongus_path);
